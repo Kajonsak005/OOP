@@ -1,81 +1,46 @@
+from gettext import Catalog
 from Author import Author
+from Catalog import Catalog
 
-class Book: 
-    run_number = 1
-    books = []
 
-    def __init__(self,isbn,authors,title,subject,dds_number):
+class Book:
+    def __init__(self, isbn, authors, title, subject, dds_number):
 
-        self._id = Book.run_number
-
-        check_isbn = Book.get_book_by_isbn(isbn)
+        check_isbn = Catalog.search(Catalog.ISBN, isbn)
         if len(check_isbn):
             raise Exception("ISBN "+isbn+" is duplicate")
 
+        temp_author = []
+        for author in authors.split(","):
+            temp_author.append(Author(author))
         self.isbn = isbn
-        self._authors = Author.find_id_by_list(authors)  
-        self.title = title 
-        self.subject = subject 
-        self.dds_number = dds_number 
+        self.authors = temp_author
+        self.title = title
+        self.subject = subject
+        self.dds_number = dds_number
 
-        Book.books.append(self)
-        Book.run_number += 1
+    def title_match(self, name):
+        if name == self.title:
+            return True
+        return False
 
-    @property
-    def id(self):
-        return self._id
+    def subject_match(self, subject):
+        if subject == self.subject:
+            return True
+        return False
 
-    @property
-    def authors(self):
-        author_list = []
-        for author in self._authors:
-            author_list.append(Author.get_author_by_id(author))
-        return author_list
+    def author_match(self, author_name):
+        for author in self.authors:
+            if author_name == author.name:
+                return True
+        return False
 
-    @authors.setter
-    def authors(self,authors):
-        if isinstance(authors,list):
-            self.authors = Author.find_id_by_list(authors)
-        print("set authors:",authors) 
+    def dds_number_match(self, dds_number):
+        if dds_number == self.dds_number:
+            return True
+        return False
 
-    def delete(self):
-        Book.books.remove(self)
-        print("success! delete Book title: ",self.title)
-
-
-    def get_book_by_title(name):
-        books_list = []
-        for book in Book.books:
-            if name == book.title:
-                books_list.append(book)
-        return books_list  
-
-    def get_book_by_subject(subject):
-        books_list = []
-        for book in Book.books:
-            if subject == book.subject:
-                books_list.append(book)
-        return books_list
-
-    def get_book_by_author(author_name):
-        books_list = []
-        for book in Book.books:
-            for author_list in book.authors:
-                if author_name == author_list.name:
-                    books_list.append(book)
-        return books_list
-
-    def get_book_by_dds_number(dds_number):
-        books_list = []
-        for book in Book.books:
-            if dds_number == book.dds_number:
-                books_list.append(book)
-        return books_list  
-
-    def get_book_by_isbn(isbn):
-        books_list = []
-        for book in Book.books:
-            if isbn == book.isbn:
-                books_list.append(book)
-        return books_list  
-
+    def isbn_match(self, isbn):
+        if isbn == self.isbn:
+            return True
+        return False
