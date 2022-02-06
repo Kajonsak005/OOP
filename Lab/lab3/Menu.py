@@ -6,7 +6,7 @@ class Menu:
 
     note_book = Notebook()
     note_book.new_note(Note("memo", "tags"))
-    note_book.new_note(Note("kong", "king"))
+    note_book.new_note(Note("kong", "king,king,king,king"))
     note_book.new_note(Note("kong", "king"))
     note_book.new_note(Note("kong", "king"))
     note_book.new_note(Note("kong", "king"))
@@ -18,7 +18,8 @@ class Menu:
         for note in Menu.note_book.notes:
             print("\n\nId:", note.id)
             print("Memo:", note.memo)
-            print("Tags:", note.tags)
+            print("Tags:", ', '.join(
+                [str(tags)for tags in note.tags]))
             print("Creation date:", note.creation_date)
 
     def search_note():
