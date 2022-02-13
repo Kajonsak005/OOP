@@ -15,7 +15,7 @@ class Note:
 
     def match(self, tag_or_memo):
         for tag in self.tags:
-            if tag.find(tag_or_memo):
+            if tag.find(tag_or_memo) >= 0:
                 return True
         if self.memo.find(tag_or_memo) >= 0:
             return True

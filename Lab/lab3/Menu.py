@@ -18,8 +18,7 @@ class Menu:
         for note in Menu.note_book.notes:
             print("\n\nId:", note.id)
             print("Memo:", note.memo)
-            print("Tags:", ', '.join(
-                [str(tags)for tags in note.tags]))
+            print("Tags:", ', '.join([str(tags)for tags in note.tags]))
             print("Creation date:", note.creation_date)
 
     def search_note():
