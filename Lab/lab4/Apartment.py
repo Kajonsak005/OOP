@@ -3,7 +3,7 @@ from Property import Property
 
 class Apartment(Property):
 
-    def __init__(self, balcony, laundry, **data):
+    def __init__(self, balcony=False, laundry='', **data):
         Property.__init__(**data)
         self.balcony = balcony
         self.laundry = laundry

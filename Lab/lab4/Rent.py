@@ -1,6 +1,6 @@
 class Rent:
 
-    def __init__(self, furnished, rent):
+    def __init__(self, furnished=False, rent=''):
         self.furnished = furnished
         self.rent = rent
 

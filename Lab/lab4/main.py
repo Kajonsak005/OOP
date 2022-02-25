@@ -26,8 +26,18 @@ def input_house():
 def input_apartment():
     print("\nApartment info")
     prop = input_property()
+
+    temp = False
+    answer = input("balcony (yes or no): ")
+    if answer.lower() == "yes":
+        temp = True
+    elif answer.lower() == "no":
+        temp = False
+    else:
+        raise Exception("Please input only yes or no")
+
     apartment = {
-        "balcony": input("balcony: "),
+        "balcony": temp,
         "laundry": input("laundry: ")
     }
     return {**apartment, **prop}
@@ -35,8 +45,17 @@ def input_apartment():
 
 def input_rent():
     print("Rental info")
+    temp = False
+    answer = input("furnished (yes or no): ")
+    if answer.lower() == "yes":
+        temp = True
+    elif answer.lower() == "no":
+        temp = False
+    else:
+        raise Exception("Please input only yes or no")
+
     return {
-        "furnished": input("furnished (yes or no): "),
+        "furnished": temp,
         "rent": input("rent: ")
     }
 
@@ -86,10 +105,9 @@ while True:
     if option == 1:
         resident, resident_info = select_residence()
         payment, payment_info = select_payment()
-        type = {"type": resident+" "+payment}
 
         class_select = type_map[(resident, payment)]
-        resident = class_select(**{**resident_info, **payment_info, **type})
+        resident = class_select(**{**resident_info, **payment_info})
         agent.add_property(resident)
     elif option == 2:
         agent.list_property()
