@@ -2,20 +2,21 @@ from Property import Property
 
 
 class House(Property):
-
-    def __init__(self, garage, fenced_yard, **property):
-        super().__init__(**property)
+    def __init__(self, garage='', fenced_yard='', **data):
+        Property.__init__(self, **data)
         self.garage = garage
         self.fenced_yard = fenced_yard
 
     def display(self):
-        Property.display(self)
+        super().display()
         print("garage:", self.garage)
-        print("fenced_yard:", self.fenced_yard)
+        print("fenced yard:", self.fenced_yard)
 
     @staticmethod
-    def prompt_init(garage, fenced_yard, **property):
-        dictionary = Property.prompt_init(**property)
-        dictionary.update({"garage": garage})
-        dictionary.update({"fenced_yard": fenced_yard})
-        return dictionary
+    def prompt_init(garage, fenced_yard, **data):
+        property_init = Property.prompt_init(**data)
+        property_init.update({
+            "garage": garage,
+            "fenced_yard": fenced_yard,
+        })
+        return property_init

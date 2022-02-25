@@ -1,13 +1,11 @@
 class Rent:
 
-    def __init__(self, furnished, rent, **data):
-        super().__init__(**data)
+    def __init__(self, furnished, rent):
         self.furnished = furnished
         self.rent = rent
 
     def display(self):
-        print("furnished:", self.furnished)
-        print("rent:", self.rent)
+        print("furnished:", self.furnished, "\nrent:", self.rent)
 
     @staticmethod
     def prompt_init(furnished, rent):
