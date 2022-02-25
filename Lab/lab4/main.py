@@ -97,17 +97,22 @@ def select_payment():
 
 
 while True:
-    print("\nPlease select option (number only)")
-    print("1: Add resident")
-    print("2: Display all resident")
-    option = int(input("select option: "))
 
-    if option == 1:
-        resident, resident_info = select_residence()
-        payment, payment_info = select_payment()
+    try:
 
-        class_select = type_map[(resident, payment)]
-        resident = class_select(**{**resident_info, **payment_info})
-        agent.add_property(resident)
-    elif option == 2:
-        agent.list_property()
+        print("\nPlease select option (number only)")
+        print("1: Add resident")
+        print("2: Display all resident")
+        option = int(input("select option: "))
+
+        if option == 1:
+            resident, resident_info = select_residence()
+            payment, payment_info = select_payment()
+
+            class_select = type_map[(resident, payment)]
+            resident = class_select(**{**resident_info, **payment_info})
+            agent.add_property(resident)
+        elif option == 2:
+            agent.list_property()
+    except Exception as e:
+        print(e)
